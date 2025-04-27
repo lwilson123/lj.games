@@ -303,5 +303,10 @@
     "name": "Chrome Dino",
     "path": "Games/chrome-dino/index.html",
     "image": "Images/chromedino.png"
+  },
+  {
+    "name": "Whack your boss",
+    "path": "Games/wack-your-boss/wyb.html",
+    "image": "Images/wyb.png"
   }
 ]
