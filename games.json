@@ -1,6 +1,6 @@
 [
   {
-    "name": "Drift Hunters",
+    "name": "Drift Hunters (not working)",
     "path": "Games/DriftHunters-main/DriftHunters-main/index.html",
     "image": "Images/drifthunters.png"
   },
@@ -35,16 +35,6 @@
     "image": "Images/mzl.lsbcyngl.png"
   },
   {
-    "name": "Helix Jump",
-    "path": "Games/helixJump.html",
-    "image": "Images/71606KJi5+L.png"
-  },
-  {
-    "name": "Angry Birds",
-    "path": "Games/angryBirds.html",
-    "image": "Images/angrybirds-1674798875645.png"
-  },
-  {
     "name": "The Impossible Quiz",
     "path": "Games/impossiblequiz/impossiblequiz.html",
     "image": "Images/impossiblequiz.jpg"
@@ -73,11 +63,6 @@
     "name": "Cluster Rush",
     "path": "Games/ClusterRush/clusterRush.html",
     "image": "Images/c5e98cf22f549cfcecfe871447e31e0a.jpeg"
-  },
-  {
-    "name": "Friday Night Funkin",
-    "path": "Games/Funkin-Html5-main/Funkin-Html5-main/index.html",
-    "image": "Images/1000x1000.jpg"
   },
   {
     "name": "Super Mario 64",
@@ -118,11 +103,6 @@
     "name": "Infiltrating the Airship",
     "path": "Games/henrystickman/airship/airship.html",
     "image": "Images/airship.jpg"
-  },
-  {
-    "name": "Slope",
-    "path": "Games/Slope-Game-main/index.html",
-    "image": "Images/slope-unblocked.jpg"
   },
   {
     "name": "Fnaf",
@@ -175,7 +155,7 @@
     "image": "Images/geometry-dash-online.png"
   },
   {
-    "name": "Google Baseball",
+    "name": "Google Baseball (click fullscreen)",
     "path": "https://www.google.com/logos/2019/july4th19/r3/july4th19.html",
     "image": "Images/baseball2.jpg"
   },
@@ -183,11 +163,6 @@
     "name": "Spank The Monkey",
     "path": "Games/spankthemonkey/stm.html",
     "image": "Images/stm.jpg"
-  },
-  {
-    "name": "Proxy (Working!)",
-    "path": "https://outred.fun/go.html",
-    "image": "Images/images.png"
   },
   {
     "name": "Retro Bowl",
@@ -293,16 +268,6 @@
     "name": "Basket Random",
     "path": "Games/basket-random/index.html",
     "image": "Images/splash.jpg"
-  },
-  {
-    "name": "Pixel Speedrun",
-    "path": "Games/pixelspeedrun.html",
-    "image": "Images/pixelspeedrun.jpeg"
-  },
-  {
-    "name": "Chrome Dino",
-    "path": "Games/chrome-dino/index.html",
-    "image": "Images/chromedino.png"
   },
   {
     "name": "Whack your boss",
