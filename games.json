@@ -273,5 +273,10 @@
     "name": "Whack your boss",
     "path": "Games/wack-your-boss/wyb.html",
     "image": "Images/wyb.png"
+  },
+  {
+    "name": "Paper Minecraft",
+    "path": "Games/paperminecraft.html",
+    "image": "Images/pminecraft.png"
   }
 ]
