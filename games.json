@@ -1,18 +1,13 @@
 [
   {
     "name": "Drift Hunters not working",
-    "path": "Games/DriftHunters-main/DriftHunters-main/index.html",
+    "path": "Games/DriftHunters-main/index.html",
     "image": "Images/drifthunters.png"
   },
   {
     "name": "Happy Wheels",
     "path": "Games/HappyWheels/index.html",
     "image": "Images/R.png"
-  },
-  {
-    "name": "1v1LoL",
-    "path": "Games/1v1LOL/1v1LOL.html",
-    "image": "Images/1v1.LOL-Unblocked.jpg"
   },
   {
     "name": "Minecraft",
@@ -125,11 +120,6 @@
     "image": "Images/fnaf-4.png"
   },
   {
-    "name": "Baldis Basics",
-    "path": "Games/baldi/index.html",
-    "image": "Images/unnamed (3).png"
-  },
-  {
     "name": "Papas Freezeria",
     "path": "Games/papasrias/freezeria/freez.html",
     "image": "Images/papasfreezeria.png"
@@ -185,11 +175,6 @@
     "image": "Images/rooftop-snipers-logo.jpg"
   },
   {
-    "name": "Monkey Mart",
-    "path": "Games/monkey-mart/index.html",
-    "image": "Images/monkey-mart.jpg"
-  },
-  {
     "name": "Basketball Stars",
     "path": "Games/basketball-stars/index.html",
     "image": "Images/bs.jpg"
@@ -228,11 +213,6 @@
     "name": "Paperio",
     "path": "Games/paperio2/index.html",
     "image": "Images/paperio.png"
-  },
-  {
-    "name": "Orange Roulette",
-    "path": "Games/orangeroullete/or.html",
-    "image": "Images/orangeroullete.png"
   },
   {
     "name": "Riddle School",
