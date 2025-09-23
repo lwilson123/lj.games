@@ -258,5 +258,10 @@
     "name": "Whack your boss",
     "path": "Games/wack-your-boss/wyb.html",
     "image": "Images/wyb.png"
+  },
+  {
+    "name": "Dune",
+    "path": "Games/dune.html",
+    "image": "Images/dunelol.png"
   }
 ]
