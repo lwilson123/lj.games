@@ -1,6 +1,6 @@
 [
   {
-    "name": "Drift Hunters not working",
+    "name": "Drift Hunters",
     "path": "Games/DriftHunters-main/index.html",
     "image": "Images/drifthunters.png"
   },
@@ -265,8 +265,8 @@
     "image": "Images/dunelol.png"
   },
   {
-    "name": "PolyTrack",
+    "name": "polytrack",
     "path": "Games/polytrack.html",
-    "image": "Images/polytrack.jpeg"
+    "image": "Images/poly.png"
   }
 ]
