@@ -263,5 +263,10 @@
     "name": "Dune V2",
     "path": "Games/dune.html",
     "image": "Images/dunelol.png"
+  },
+  {
+    "name": "PolyTrack",
+    "path": "Games/polytrack.html",
+    "image": "Images/polytrack.jpeg"
   }
 ]
