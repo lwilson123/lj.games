@@ -17,6 +17,17 @@
       font-family: Arial, sans-serif;
       display: flex;
       flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #particle-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
     }
 
     .topnav {
@@ -24,6 +35,8 @@
       background: rgba(15,22,36,0.9);
       padding: 10px;
       gap: 15px;
+      position: relative;
+      z-index: 2;
     }
 
     .topnav a {
@@ -53,19 +66,52 @@
       align-items: center;
       text-align: center;
       gap: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    @keyframes floatWobble {
+      0% { transform: translateY(0px) rotate(0deg); }
+      25% { transform: translateY(-3px) rotate(-0.5deg); }
+      50% { transform: translateY(0px) rotate(0.5deg); }
+      75% { transform: translateY(2px) rotate(-0.3deg); }
+      100% { transform: translateY(0px) rotate(0deg); }
+    }
+
+    @keyframes glowPulse {
+      0% { text-shadow: 0 0 10px #a36fff; }
+      50% { text-shadow: 0 0 25px #a36fff; }
+      100% { text-shadow: 0 0 10px #a36fff; }
+    }
+
+    @keyframes hoverJitter {
+      0% { transform: translate(0,0); }
+      25% { transform: translate(1px,-1px); }
+      50% { transform: translate(-1px,1px); }
+      75% { transform: translate(1px,1px); }
+      100% { transform: translate(0,0); }
     }
 
     h1 {
       color: white;
       font-size: 3em;
-      text-shadow: 0 0 15px #a36fff;
       margin: 0;
+      animation: floatWobble 4s ease-in-out infinite, glowPulse 3s ease-in-out infinite;
+    }
+
+    h1:hover {
+      animation: hoverJitter 0.2s infinite;
     }
 
     p {
       color: #aaa;
       font-size: 1.2em;
       max-width: 500px;
+      transition: 0.3s;
+    }
+
+    p:hover {
+      text-shadow: 0 0 10px #a36fff;
     }
 
     .buttons {
@@ -92,6 +138,7 @@
       background: #a36fff;
       box-shadow: 0 0 20px rgba(163,111,255,0.8);
       transform: scale(1.05);
+      animation: hoverJitter 0.15s infinite;
     }
 
     footer {
@@ -99,11 +146,19 @@
       color: #666;
       padding: 10px;
       font-size: 14px;
+      position: relative;
+      z-index: 2;
+      transition: 0.3s;
+    }
+
+    footer:hover {
+      text-shadow: 0 0 8px #a36fff;
     }
   </style>
 </head>
 
 <body>
+  <canvas id="particle-canvas"></canvas>
 
   <div class="topnav">
     <a class="active" href="index.html">home</a>
@@ -127,6 +182,107 @@
   <footer>
     Site made by LJGAMES™
   </footer>
+
+  <script>
+    const canvas = document.getElementById('particle-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    const mouse = {x:null, y:null, radius:100};
+
+    function resizeCanvas(){
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    window.addEventListener('mousemove', function(e){
+      mouse.x = e.x;
+      mouse.y = e.y;
+    });
+
+    class Particle {
+      constructor(){
+        this.reset();
+      }
+      reset(){
+        this.x = Math.random()*canvas.width;
+        this.y = Math.random()*canvas.height;
+        this.vx = (Math.random()-0.5)*0.3;
+        this.vy = (Math.random()-0.5)*0.3;
+        this.radius = Math.random()*2+1;
+        this.alpha = Math.random()*0.5+0.3;
+      }
+      update(){
+        // Natural drift
+        this.x += this.vx;
+        this.y += this.vy;
+
+        // Mouse repulsion
+        if(mouse.x && mouse.y){
+          const dx = this.x - mouse.x;
+          const dy = this.y - mouse.y;
+          const dist = Math.sqrt(dx*dx + dy*dy);
+          if(dist < mouse.radius){
+            const angle = Math.atan2(dy, dx);
+            const force = (mouse.radius - dist)/mouse.radius*2;
+            this.vx += Math.cos(angle)*force*0.1;
+            this.vy += Math.sin(angle)*force*0.1;
+          }
+        }
+
+        // Slow down
+        this.vx *= 0.95;
+        this.vy *= 0.95;
+
+        // Respawn if out of bounds
+        if(this.x<0||this.x>canvas.width||this.y<0||this.y>canvas.height){
+          this.reset();
+        }
+      }
+      draw(){
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2);
+        ctx.fillStyle=`rgba(163,111,255,${this.alpha})`;
+        ctx.fill();
+      }
+    }
+
+    for(let i=0;i<120;i++) particles.push(new Particle());
+
+    function animate(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+
+      // Draw particles
+      for(let p of particles){
+        p.update();
+        p.draw();
+      }
+
+      // Draw connecting lines
+      for(let i=0;i<particles.length;i++){
+        for(let j=i+1;j<particles.length;j++){
+          const p1 = particles[i];
+          const p2 = particles[j];
+          const dx = p1.x - p2.x;
+          const dy = p1.y - p2.y;
+          const dist = Math.sqrt(dx*dx+dy*dy);
+          if(dist<120){
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(163,111,255,${1 - dist/120})`;
+            ctx.lineWidth = 1;
+            ctx.moveTo(p1.x,p1.y);
+            ctx.lineTo(p2.x,p2.y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
 
 </body>
 </html>
