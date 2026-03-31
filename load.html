@@ -8,51 +8,121 @@
   <meta name="viewport" content="width=device-width">
   <link href="style.css" rel="stylesheet" type="text/css" />
 
-  <video id="background-video" autoplay loop muted poster="Images/purplepng.png"> 
-    <source src="Images/purple.mp4" type="video/mp4">
-  </video>
-  
+  <!-- Google Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
   <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: #070b14;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
 
+    .topnav {
+      display: flex;
+      background: rgba(15,22,36,0.9);
+      padding: 10px;
+      gap: 15px;
+      z-index: 2;
+    }
 
-    #iframe-container {
+    .topnav a {
+      color: #7aa2ff;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 5px 10px;
+    }
+
+    .topnav a.active {
+      color: #fff;
+      border-bottom: 2px solid #a36fff;
+    }
+
+    h1 {
+      color: white;
+      text-align: center;
+      margin: 10px 0;
+    }
+
+    .bubble-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex: 1;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    .bubble {
+      width: 90%;
+      max-width: 1200px;
+      height: 75vh;
+      border: 4px solid #a36fff;
+      border-radius: 30px;
+      box-shadow: 0 0 35px rgba(163,111,255,0.5);
+      overflow: hidden;
+      background: #0f1624;
+      padding: 15px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .iframe-wrapper {
       position: relative;
-      top: 65%;
-      left: 50%;
+      width: 100%;
+      height: 100%;
+      flex: 1;
     }
 
     iframe {
-        
-        
-        
-        
-        height: 650px;
-        width: 1000px;
-      
-      
-        border: 4px solid black;
-        border-radius: 6px;
-        background: #191919;
-        background-image: url("Images/loading.GIF");   
-        background-repeat: no-repeat;
-        background-position: 50% 50%;
-        position: relative;
+      width: 100%;
+      height: 100%;
+      border: 3px solid #a36fff;
+      border-radius: 15px;
+      background: #191919 url("Images/loading.GIF") no-repeat center;
+    }
+
+    /* 🔘 Floating fullscreen button */
+    .fullscreen-btn {
+      position: absolute;
+      bottom: 15px;
+      left: 15px;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(163,111,255,0.2);
+      backdrop-filter: blur(5px);
+      color: white;
+      cursor: pointer;
       display: flex;
+      align-items: center;
       justify-content: center;
-      left: 20%;
-      /* Remove align-items property */
-
-        
+      transition: 0.2s;
+      box-shadow: 0 0 10px rgba(163,111,255,0.5);
     }
 
-    #game-name {
-      margin-top: 20px;
+    .fullscreen-btn:hover {
+      background: rgba(163,111,255,0.5);
+      transform: scale(1.1);
     }
 
-    #resize-button {
-      position: relative;
-      top: 10px;
-      left: 10px;
+    .material-symbols-outlined {
+      font-size: 24px;
+    }
+
+    h3 {
+      color: #aaa;
+      text-align: center;
+      margin: 5px;
+      font-size: 14px;
     }
   </style>
 </head>
@@ -67,59 +137,41 @@
     <a href="fnfmods.html">FNF Mods</a>
   </div>
 
-
-  
   <h1 id="game-name"></h1>
 
-<button onclick="openNewTab()">fullscreen</button>
-  
-    <iframe id="game-iframe" src="">
-    </iframe>
-  
+  <div class="bubble-container">
+    <div class="bubble">
 
-  
- 
-    
+      <div class="iframe-wrapper">
+        <iframe id="game-iframe" src=""></iframe>
+
+        <!-- 🔘 Icon Button -->
+        <button class="fullscreen-btn" onclick="goFullscreen()">
+          <span class="material-symbols-outlined">fullscreen</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <h3>Site made by LJGames</h3>
+
   <script src="load.js"></script>
 
   <script>
-    function openNewTab() {
-      // Replace 'https://www.example.com' with your desired URL stored in a variable
-      var url = document.getElementById("game-iframe").src;
+    function goFullscreen() {
+      var iframe = document.getElementById("game-iframe");
 
-      // Open a new tab with the specified URL
-      var newTab = window.open(url, '_blank');
-
-      // Focus on the new tab (optional)
-      if (newTab) {
-        newTab.focus();
+      if (iframe.requestFullscreen) {
+        iframe.requestFullscreen();
+      } else if (iframe.webkitRequestFullscreen) {
+        iframe.webkitRequestFullscreen();
+      } else if (iframe.msRequestFullscreen) {
+        iframe.msRequestFullscreen();
       }
     }
   </script>
 
-  <script>
-
-    
-    document.getElementById ("FullScreenButton").addEventListener ("click", myFunction, false);
-
-    function myFunction() {
-   var gameUrl = document.getElementById("game-iframe").src;
-       var button = document.getElementById('FullScreenButton');
-
-
-      window.location.href = gameUrl;
-    }
-       
-
-       
-  </script>
-  
-  
-
-  <h3>
-    Site made by LJGames
-  </h3>
-  
 </body>
 
 </html>
