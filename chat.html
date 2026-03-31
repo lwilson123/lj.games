@@ -1,15 +1,97 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>LJ Games | Chat</title>
-  <link rel="shortcut icon" href="https://img.icons8.com/?size=1x&id=80012&format=png" />
-  <link href="style.css" rel="stylesheet" type="text/css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LJ Games | Chat</title>
+<link rel="shortcut icon" href="https://img.icons8.com/?size=1x&id=80012&format=png" />
+<link href="style.css" rel="stylesheet" type="text/css" />
+<style>
+  body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: #070b14;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #background-video {
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+
+  .topnav {
+    display: flex;
+    background: rgba(15,22,36,0.9);
+    padding: 10px;
+    gap: 15px;
+    z-index: 2;
+  }
+
+  .topnav a {
+    color: #7aa2ff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 10px;
+  }
+
+  .topnav a.active {
+    color: #fff;
+    border-bottom: 2px solid #a36fff;
+  }
+
+  h1 {
+    color: white;
+    text-align: center;
+    margin: 10px 0;
+  }
+
+  h1 a img {
+    vertical-align: middle;
+    width: 30px;
+    height: 30px;
+  }
+
+  .iframe-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .iframe-bubble {
+    width: 90%;
+    max-width: 1200px;
+    height: 80%;
+    border: 4px solid #a36fff;
+    border-radius: 30px;
+    box-shadow: 0 0 35px rgba(163,111,255,0.5);
+    overflow: hidden;
+    background: #0f1624;
+  }
+
+  .iframe-bubble iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+</style>
 </head>
 <body>
 
-<video id="background-video" autoplay loop muted poster="Images/purplepng.png"> 
+<video id="background-video" autoplay loop muted poster="Images/purplepng.png">
   <source src="Images/purple.mp4" type="video/mp4">
 </video>
 
@@ -20,42 +102,16 @@
    <a href="Games/Soundboard/ll/index.html">soundboard</a>
 </div>
 
-<h1>LJ Unblocked Chat | Undisabled
+<h1>
+  LJ Unblocked Chat | Undisabled
   <a href="secret.html">
-    <img src="Images/fot.gif" loop="infinite"/>
+    <img src="Images/fot.gif" loop="infinite" />
   </a>
 </h1>
 
-<div style="
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 80vh;
-  padding: 10px;
-  box-sizing: border-box;
-">
-  <div style="
-    position: relative;
-    width: 90%;
-    max-width: 1200px;
-    height: 100%;
-    border: 4px solid #a36fff;
-    border-radius: 30px;
-    box-shadow: 0 0 35px rgba(163,111,255,0.5);
-    overflow: hidden;
-    background: #0f1624;
-  ">
-    <iframe 
-      src="Games/chat.html" <!-- CHANGE THIS to your actual chat HTML file -->
-      style="
-        width: 100%;
-        height: 100%;
-        border: none;
-        display: block;
-      "
-      frameborder="0"
-      scrolling="yes"
-    ></iframe>
+<div class="iframe-container">
+  <div class="iframe-bubble">
+    <iframe src="Games/chat-app.html" scrolling="yes"></iframe>
   </div>
 </div>
 
