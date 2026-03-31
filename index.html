@@ -1,163 +1,132 @@
 <!DOCTYPE html>
 <html>
-
-  
-  <title>LJ Games | Home</title> 
+<head>
+  <title>LJ Games | Home</title>
   <link rel="shortcut icon" href="Images/Background.png" />
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <link href="style.css" rel="stylesheet" type="text/css" />
-  
-  <video id="background-video" autoplay loop muted poster="Images/purplepng.PNG"> 
-    <source src="Images/purple.mp4" type="video/mp4">
-  </video>
-  
-  
-<head>
 
-<link rel="shortcut icon" href="https://img.icons8.com/?size=1x&id=80012&format=png" />
-  
-  
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: #070b14;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+    }
 
-  <link href="style.css" rel="stylesheet" type="text/css" />
+    .topnav {
+      display: flex;
+      background: rgba(15,22,36,0.9);
+      padding: 10px;
+      gap: 15px;
+    }
+
+    .topnav a {
+      color: #7aa2ff;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 5px 10px;
+      transition: 0.2s;
+    }
+
+    .topnav a:hover {
+      color: #fff;
+      text-shadow: 0 0 8px #a36fff;
+    }
+
+    .topnav a.active {
+      color: #fff;
+      border-bottom: 2px solid #a36fff;
+      text-shadow: 0 0 10px #a36fff;
+    }
+
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      gap: 20px;
+    }
+
+    h1 {
+      color: white;
+      font-size: 3em;
+      text-shadow: 0 0 15px #a36fff;
+      margin: 0;
+    }
+
+    p {
+      color: #aaa;
+      font-size: 1.2em;
+      max-width: 500px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      background: transparent;
+      border: 2px solid #a36fff;
+      padding: 12px 25px;
+      border-radius: 12px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.25s;
+      text-decoration: none;
+      box-shadow: 0 0 10px rgba(163,111,255,0.4);
+    }
+
+    .btn:hover {
+      background: #a36fff;
+      box-shadow: 0 0 20px rgba(163,111,255,0.8);
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      color: #666;
+      padding: 10px;
+      font-size: 14px;
+    }
+  </style>
 </head>
 
 <body>
-
- 
-  
-
 
   <div class="topnav">
     <a class="active" href="index.html">home</a>
-    <a  href="games.html">Games</a>
+    <a href="games.html">Games</a>
     <a href="chat.html">Chat</a>
     <a href="Games/Soundboard/ll/index.html">soundboard</a>
-
- 
-    
-  
+    <a href="fnfmods.html">FNF Mods</a>
   </div>
 
-  <div1>
-  
-<h1> Welcome to LJ Unblocked Games V7.0!
-  <a href="secret.html">
-<img src="Images/fot.gif" loop="infinite"</img> </h1>
-  </a>
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/11.1.0/firebase-app.js"></script>
-<script src="script.js"></script>
+  <div class="main">
+    <h1>LJ Games</h1>
+    <p>Play games, chat with friends, and explore mods — all in one place.</p>
 
-
-
-<!DOCTYPE html>
-<html>
-<head>
-    <style>
-        .centered {
-          text-align: center;
-          margin-top: 100px;
-
-
-          
-        }
-    </style>
-  <style>
-        .hbutton-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-    </style>
-</head>
-<body>
-
- 
-    <div class="centered">
-      <style> .hbutton{         
-        
-      font-size: 20px; 
-      background-color: purple;
-      color: black; 
-      border: 2px solid black;
-  padding: 10px;
-  cursor: url('Images/Golden Pistol.cur'),default;
-
-.centered {
-
-
-  
-}
-  
-      }
-        .hbutton:hover{         
-
-            font-size: 20px; 
-            background-color: black;
-            color: purple; 
-            border: 2px purple;
-        padding: 10px;
-        cursor: crosshair;
-        }
-      </style>
-
-      
+    <div class="buttons">
+      <a href="games.html" class="btn">Play Games</a>
+      <a href="chat.html" class="btn">Open Chat</a>
+      <a href="fnfmods.html" class="btn">FNF Mods</a>
     </div>
+  </div>
 
-  <div class="centered">
-  <h1>Popular games:</h1>
+  <footer>
+    Site made by LJGames
+  </footer>
 
-
-  <!-- Image button -->
-  <a href="Games/DriftHunters-main/DriftHunters-main/index.html" class="image-button">
-      <img src="https://image.winudf.com/v2/image1/Y29tLnN0dWRpb251bTQzLmRyaWZ0X2h1bnRlcnNfY2FyX3R1bmluZ19pY29uXzE2Mjc4MzI5MTRfMDA5/icon.png?w=170&fakeurl=1" alt="Button Image">
-      <div class="tooltip">Drift Hunters</div>
-  </a>
-
-
-    <!-- Image button -->
-    <a href="Games/1v1LOL/1v1LOL.html" class="image-button">
-        <img src="Images/1v1.LOL-Unblocked.jpg">
-          <div class="tooltip">1v1LoL</div>
-    </a>
-
-    <!-- Image button -->
-  <a href="Games/JustFall/justFall.html" class="image-button">
-      <img src="Games/JustFall/unnamed.png">
-        <div class="tooltip">Just Fall LoL</div>
-  </a>
-
-      <a href="https://forms.gle/2EgAus8psrkoeeNHA" class="image-button">
-      <img src="Images/aag.jpg">
-        <div class="tooltip">Add a game</div>
-  </a>
-
-
-           <!-- Image button -->
-  <a href="Games/paperio2/index.html" class="image-button">
-      <img src="Images/paperio.png">
-        <div class="tooltip">paperIO</div>
-  </a>
-
-           <!-- Image button -->
-  <a href="Games/drive-mad/index.html" class="image-button">
-      <img src="Images/drivemad.png">
-        <div class="tooltip">drive mad</div>
-  </a>
-
-                           <!-- Image button -->
-  <a href="Games/fnaf4/index.html" class="image-button">
-      <img src="Images/fnaf-4.png">
-        <div class="tooltip">Fnaf 4</div>
-  </a>
-
-</div>
-  <div class="centered">
-<h1>made by LJGAMES™</h1>
- </div>
-  
 </body>
 </html>
-    
-
