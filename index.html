@@ -57,45 +57,36 @@
       gap: 20px;
     }
 
-    /* SMOOTH FLOAT */
-    @keyframes float {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-6px); }
-      100% { transform: translateY(0px); }
+    @keyframes floatRotate {
+      0% { transform: translateY(0px) rotate(-2deg); }
+      50% { transform: translateY(-10px) rotate(2deg); }
+      100% { transform: translateY(0px) rotate(-2deg); }
     }
 
-    /* SMOOTH SHAKE (not aggressive) */
-    @keyframes smoothShake {
-      0% { transform: translate(0,0); }
-      25% { transform: translate(1px,-1px); }
-      50% { transform: translate(-1px,1px); }
-      75% { transform: translate(1px,1px); }
-      100% { transform: translate(0,0); }
+    @keyframes glowPulse {
+      0% { text-shadow: 0 0 10px #a36fff; }
+      50% { text-shadow: 0 0 30px #a36fff; }
+      100% { text-shadow: 0 0 10px #a36fff; }
     }
 
     h1 {
       color: white;
       font-size: 3em;
       margin: 0;
-      animation: float 4s ease-in-out infinite;
-      transition: 0.2s;
+      display: inline-block;
+      animation: floatRotate 5s ease-in-out infinite,
+                 glowPulse 3s ease-in-out infinite;
     }
 
-    h1:hover {
-      animation: smoothShake 0.3s infinite;
-      text-shadow: 0 0 20px #a36fff;
+    .letter {
+      display: inline-block;
+      transition: transform 0.25s ease;
     }
 
     p {
       color: #aaa;
       font-size: 1.2em;
       max-width: 500px;
-      transition: 0.3s;
-    }
-
-    p:hover {
-      animation: smoothShake 0.4s infinite;
-      text-shadow: 0 0 10px #a36fff;
     }
 
     .buttons {
@@ -116,13 +107,13 @@
       text-decoration: none;
       transition: all 0.25s ease;
       box-shadow: 0 0 10px rgba(163,111,255,0.4);
+      position: relative;
     }
 
     .btn:hover {
       background: #a36fff;
-      transform: scale(1.08);
       box-shadow: 0 0 25px rgba(163,111,255,0.9);
-      animation: smoothShake 0.25s infinite;
+      transform: scale(1.05);
     }
 
     footer {
@@ -132,11 +123,6 @@
       font-size: 14px;
       z-index: 2;
     }
-
-    footer:hover {
-      text-shadow: 0 0 8px #a36fff;
-      animation: smoothShake 0.4s infinite;
-    }
   </style>
 </head>
 
@@ -145,15 +131,15 @@
 <canvas id="particle-canvas"></canvas>
 
 <div class="topnav">
-  <a class="active" href="index.html">Home</a>
+  <a class="active" href="index.html">home</a>
   <a href="games.html">Games</a>
   <a href="chat.html">Chat</a>
-  <a href="Games/Soundboard/ll/index.html">Soundboard</a>
+  <a href="Games/Soundboard/ll/index.html">soundboard</a>
   <a href="fnfmods.html">FNF Mods</a>
 </div>
 
 <div class="main">
-  <h1>LJGAMES V10</h1>
+  <h1 id="title"></h1>
 
   <p>Play games, chat with friends, and explore mods — all in one place.</p>
 
@@ -167,25 +153,75 @@
 <footer>Site made by LJGAMES™</footer>
 
 <script>
+/* ========= TITLE ========= */
+const text = "LJGAMES V10";
+const title = document.getElementById("title");
+
+text.split("").forEach((char, i) => {
+  const span = document.createElement("span");
+  span.textContent = char;
+  span.className = "letter";
+  title.appendChild(span);
+
+  span.addEventListener("mousemove", () => {
+    document.querySelectorAll(".letter").forEach((l, j) => {
+      const dist = Math.abs(i - j);
+      const scale = 1 + Math.exp(-dist * 0.7) * 0.5;
+      l.style.transform = `scale(${scale})`;
+    });
+  });
+
+  span.addEventListener("mouseleave", () => {
+    document.querySelectorAll(".letter").forEach(l => {
+      l.style.transform = "scale(1)";
+    });
+  });
+});
+
+/* ========= CANVAS ========= */
 const canvas = document.getElementById('particle-canvas');
 const ctx = canvas.getContext('2d');
 
 let particles = [];
-const mouse = { x: null, y: null, radius: 120 };
+const mouse = {x:null,y:null,radius:120};
 
 function resizeCanvas(){
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 }
-window.addEventListener('resize', resizeCanvas);
+
+/* ========= RESPONSIVE PARTICLES ========= */
+function getParticleCount() {
+  const area = canvas.width * canvas.height;
+  const density = 9000;
+  let count = Math.floor(area / density);
+  return Math.max(80, Math.min(count, 300));
+}
+
+function initParticles() {
+  particles = [];
+  const count = getParticleCount();
+  for (let i = 0; i < count; i++) {
+    particles.push(new Particle());
+  }
+}
+
+/* resize hook */
+window.addEventListener('resize', () => {
+  resizeCanvas();
+  initParticles();
+});
+
 resizeCanvas();
 
-window.addEventListener('mousemove', e => {
+/* ========= MOUSE ========= */
+window.addEventListener('mousemove', e=>{
   mouse.x = e.x;
   mouse.y = e.y;
 });
 
-class Particle {
+/* ========= PARTICLE CLASS ========= */
+class Particle{
   constructor(){ this.reset(); }
 
   reset(){
@@ -204,41 +240,80 @@ class Particle {
     if(mouse.x && mouse.y){
       let dx = this.x - mouse.x;
       let dy = this.y - mouse.y;
-      let dist = Math.sqrt(dx*dx + dy*dy);
+      let dist = Math.sqrt(dx*dx+dy*dy);
 
       if(dist < mouse.radius){
         let angle = Math.atan2(dy, dx);
-        let force = (mouse.radius - dist) / mouse.radius;
-
-        this.vx += Math.cos(angle) * force * 0.6;
-        this.vy += Math.sin(angle) * force * 0.6;
+        let force = (mouse.radius - dist)/mouse.radius;
+        this.vx += Math.cos(angle)*force*0.6;
+        this.vy += Math.sin(angle)*force*0.6;
       }
     }
 
     this.x += this.vx;
     this.y += this.vy;
-
     this.vx *= 0.99;
     this.vy *= 0.99;
 
-    if(this.x < 0) this.x = canvas.width;
-    if(this.x > canvas.width) this.x = 0;
-    if(this.y < 0) this.y = canvas.height;
-    if(this.y > canvas.height) this.y = 0;
+    if(this.x<0) this.x=canvas.width;
+    if(this.x>canvas.width) this.x=0;
+    if(this.y<0) this.y=canvas.height;
+    if(this.y>canvas.height) this.y=0;
   }
 
   draw(){
     ctx.beginPath();
-    ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2);
+    ctx.arc(this.x,this.y,this.radius,0,Math.PI*2);
     ctx.fillStyle = `rgba(163,111,255,${this.alpha})`;
     ctx.fill();
   }
 }
 
-for(let i=0;i<120;i++){
-  particles.push(new Particle());
-}
+/* init particles */
+initParticles();
 
+/* ========= CLICK EXPLOSION ========= */
+document.addEventListener("click", e=>{
+  for(let i=0;i<25;i++){
+    let p = new Particle();
+    p.x = e.clientX;
+    p.y = e.clientY;
+    p.vx = (Math.random()-0.5)*6;
+    p.vy = (Math.random()-0.5)*6;
+    particles.push(p);
+  }
+});
+
+/* ========= MAGNETIC BUTTONS ========= */
+const buttons = document.querySelectorAll(".btn");
+
+document.addEventListener("mousemove", e=>{
+  buttons.forEach(btn=>{
+    let rect = btn.getBoundingClientRect();
+    let cx = rect.left + rect.width/2;
+    let cy = rect.top + rect.height/2;
+
+    let dx = e.clientX - cx;
+    let dy = e.clientY - cy;
+    let dist = Math.sqrt(dx*dx+dy*dy);
+
+    if(dist < 120){
+      let force = (120 - dist)/120;
+      btn.style.transform = `translate(${dx*0.25*force}px,${dy*0.25*force}px) scale(1.05)`;
+    } else {
+      btn.style.transform = "";
+    }
+  });
+});
+
+/* ========= CURSOR TRAIL ========= */
+let trail = [];
+
+document.addEventListener("mousemove", e=>{
+  trail.push({x:e.clientX,y:e.clientY,life:20});
+});
+
+/* ========= ANIMATE ========= */
 function animate(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
 
@@ -249,23 +324,29 @@ function animate(){
 
   for(let i=0;i<particles.length;i++){
     for(let j=i+1;j<particles.length;j++){
-      let p1 = particles[i];
-      let p2 = particles[j];
+      let dx = particles[i].x - particles[j].x;
+      let dy = particles[i].y - particles[j].y;
+      let dist = Math.sqrt(dx*dx+dy*dy);
 
-      let dx = p1.x - p2.x;
-      let dy = p1.y - p2.y;
-      let dist = Math.sqrt(dx*dx + dy*dy);
-
-      if(dist < 120){
+      if(dist<120){
+        ctx.strokeStyle = `rgba(163,111,255,${1-dist/120})`;
         ctx.beginPath();
-        ctx.strokeStyle = `rgba(163,111,255,${1 - dist/120})`;
-        ctx.lineWidth = 1;
-        ctx.moveTo(p1.x,p1.y);
-        ctx.lineTo(p2.x,p2.y);
+        ctx.moveTo(particles[i].x,particles[i].y);
+        ctx.lineTo(particles[j].x,particles[j].y);
         ctx.stroke();
       }
     }
   }
+
+  for(let t of trail){
+    ctx.beginPath();
+    ctx.arc(t.x,t.y,3,0,Math.PI*2);
+    ctx.fillStyle = `rgba(163,111,255,${t.life/20})`;
+    ctx.fill();
+    t.life--;
+  }
+
+  trail = trail.filter(t=>t.life>0);
 
   requestAnimationFrame(animate);
 }
